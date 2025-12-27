@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azan Sakhawat - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-wrap">
+            <div class="logo">AZAN<span>.</span></div>
+            <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#academic">Academic</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-btn" onclick="toggleTheme()">🌙 Theme</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Azan Sakhawat</h1>
+            <p class="reg">REG NO: 10-001-2025-01827</p>
+            <p class="bio">
+                A passionate Computer Science student at UET Peshawar, Abbottabad Campus. 
+                Currently pursuing Bachelor's degree in 1st semester with strong interest in 
+                Cyber Security. Learning programming and how to keep computers and data save. 
+                Always eager to learn and create innovative solutions.
+            </p>
+        </div>
+        <img src="profile.jpg" alt="Azan Sakhawat" class="hero-img">
+    </section>
+
+    <div class="container">
+        <section class="section" id="academic">
+            <h2 class="section-title">Academic Background</h2>
+            <p class="section-desc">My educational journey from school to university</p>
+            <div class="card">
+                <div class="controls">
+                    <input type="text" id="search" placeholder="🔍 Search..." onkeyup="filterTable()">
+                    <select id="filter" onchange="filterTable()">
+                        <option value="">All Levels</option>
+                        <option value="Matriculation">Matriculation</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                    </select>
+                </div>
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Level ▲▼</th>
+                            <th onclick="sortTable(1)">Institution ▲▼</th>
+                            <th onclick="sortTable(2)">Year ▲▼</th>
+                            <th onclick="sortTable(3)">Grade ▲▼</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr>
+                            <td>Matriculation</td>
+                            <td>Khyber Public School & College, Mansehra</td>
+                            <td>2023</td>
+                            <td>A Grade</td>
+                        </tr>
+                        <tr>
+                            <td>Intermediate</td>
+                            <td>Khyber Public School & College, Mansehra</td>
+                            <td>2025</td>
+                            <td>A Grade</td>
+                        </tr>
+                        <tr>
+                            <td>Undergraduate</td>
+                            <td>UET Peshawar (Abbottabad Campus)</td>
+                            <td>2025-Present</td>
+                            <td>In Progress</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="cv">
+            <h2 class="section-title">Curriculum Vitae</h2>
+            <p class="section-desc">Download or view my complete CV</p>
+            <div class="card">
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="cv-icon">📄</div>
+                    <h3 style="margin-bottom: 1rem;">My Curriculum Vitae</h3>
+                    <p style="margin-bottom: 2rem;">View or download my complete CV in PDF format</p>
+                    <div class="cv-btns" style="display: flex;">
+                        <button class="btn btn-primary" onclick="viewCV()">View CV</button>
+                        <a href="Azan_Sakhawat_CV.pdf" download="Azan_Sakhawat_CV.pdf" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">Download CV</a>
+                    </div>
+                </div>
+                <iframe id="cvFrame" class="cv-viewer" src="Azan_Sakhawat_CV.pdf"></iframe>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <h2 class="section-title">My Projects</h2>
+            <p class="section-desc">Showcase of my work and achievements</p>
+            <div class="projects-grid" id="projectGrid">
+                <div class="project add-project" onclick="openProjectModal()">
+                    <div class="add-icon">➕</div>
+                    <h3>Add New Project</h3>
+                    <p>Click to add project details</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal" id="projectModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Project</h3>
+                    <button class="close-modal" onclick="closeProjectModal()">×</button>
+                </div>
+                <form id="projectForm" onsubmit="submitProject(event)">
+                    <div class="form-group">
+                        <label for="projectTitle">Project Title *</label>
+                        <input type="text" id="projectTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDesc">Project Description *</label>
+                        <textarea id="projectDesc" required placeholder="Explain what your project does, technologies used, features, etc."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectCode">Code Files (optional)</label>
+                        <input type="file" id="projectCode" accept=".cpp,.c,.h,.py,.java,.js,.html,.css,.txt" multiple onchange="previewFiles('code')">
+                        <div class="project-preview" id="codePreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectImages">Images/Screenshots (optional)</label>
+                        <input type="file" id="projectImages" accept="image/*" multiple onchange="previewFiles('images')">
+                        <div class="project-preview" id="imagesPreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDocs">Documents (optional)</label>
+                        <input type="file" id="projectDocs" accept=".pdf,.doc,.docx,.zip,.rar" multiple onchange="previewFiles('docs')">
+                        <div class="project-preview" id="docsPreview"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Add Project</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="section" id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-desc">Feel free to reach out for collaborations</p>
+            <div class="card">
+                <form class="contact-form" onsubmit="handleForm(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" required>
+                        <div class="error" id="nameErr"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" required>
+                        <div class="error" id="emailErr"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="msg">Your Message *</label>
+                        <textarea id="msg" required></textarea>
+                        <div class="error" id="msgErr"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Azan Sakhawat</strong></p>
+        <p>UET Peshawar - Abbottabad Campus | Computer Science Department</p>
+        <p>&copy; 2025 All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
